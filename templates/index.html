@@ -1,19 +1,44 @@
 <head>
-    <title>{{ title }}</title>
+    <title>URL Shortener</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
 
 <body>
     <div class="App">
         <header class="App-header">
             <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Flask
-            </p>
-            <p class="small">
-                Edit <code>templates/index.html</code> and refresh to see your changes!
-            </p>
+            <h1>URL Shortener</h1>
+            <form id="shortener-form">
+                <input type="url" id="long-url" name="long-url" placeholder="Enter a long URL" required />
+                <button type="submit">Shorten</button>
+            </form>
+            <div id="result" style="margin-top: 24px;"></div>
         </header>
     </div>
+    <script>
+        document.getElementById('shortener-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const longUrl = document.getElementById('long-url').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block'; // Show result box
+            resultDiv.innerHTML = '<p>Shortening...</p>';
+            try {
+                const response = await fetch('/shorten', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ long_url: longUrl })
+                });
+                const data = await response.json();
+                const shortUrl = data.short_url;
+                resultDiv.innerHTML = `<p>Short URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a></p>`;
+            } catch (err) {
+                resultDiv.innerHTML = '<p style="color:red">Error shortening URL.</p>';
+            }
+        });
+    </script>
 </body>
 
 </html>

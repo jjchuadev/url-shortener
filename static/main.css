@@ -1,10 +1,12 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
 }
 
 code {
@@ -17,13 +19,31 @@ code {
 }
 
 .App-logo {
-    height: 40vmin;
+    height: 15vmin;
     pointer-events: none;
+    margin-bottom: 1rem;
+    animation: App-logo-spin infinite 20s linear;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 5vh auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,8 +52,85 @@ code {
     color: white;
 }
 
-.App-link {
-    color: #61dafb;
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+}
+
+#shortener-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#long-url {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#long-url::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#long-url:focus {
+    border-color: #4facfe;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#shortener-form button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    margin-left: 0.5rem;
+    margin-bottom: 1rem; /* Add margin to align with input field */
+}
+
+#shortener-form button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+}
+
+#result {
+    display: none; /* Hide by default */
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    min-width: 300px;
+    max-width: 80%;
+    word-wrap: break-word;
+    transition: all 0.3s ease;
+}
+
+#result a {
+    color: #00f2fe;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#result a:hover {
+    text-decoration: underline;
 }
 
 .heart {
